@@ -1,0 +1,50 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 30px 20px 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-header {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  animation: fadeDown 0.5s ease;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #222;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.post-count {
+  font-weight: 500;
+  color: #4f46e5;
+}
+
