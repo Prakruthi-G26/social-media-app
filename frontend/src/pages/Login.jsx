@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import './pages.css';
@@ -35,31 +35,41 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <h1>Login</h1>
+    <div className="page">
+      <div className="brand-section">
+        <h1 className="brand-title">PostBuzz</h1>
+        <p className="brand-tagline">Connect. Share. Create your buzz.</p>
+      </div>
+      <div className="login-section">
+        <div className="login">
+          <h1>Login</h1>
 
-      <form className="content" onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
+          <form className="content" onSubmit={handleLogin}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
 
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
 
-        <button type="submit">Login</button>
-      </form>
+            <button type="submit">Login</button>
+          </form>
 
-      <p>Don't have an account?</p>
-      <Link to="/">Signup</Link>
+          <p>
+            Dont have an account? &nbsp;
+            <Link to="/">Signup</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

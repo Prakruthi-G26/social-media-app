@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import './pages.css';
@@ -36,38 +36,48 @@ function Signup() {
   }
 
   return (
-    <div className="signup">
-      <h1>Sign Up</h1>
-      <form className="content" onSubmit={submit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
+    <div className="page">
+      <div className="brand-section">
+        <h1 className="brand-title">PostBuzz</h1>
+        <p className="brand-tagline">Connect. Share. Create your buzz.</p>
+      </div>
+      <div className="login-section">
+        <div className="signup">
+          <h1>Sign Up</h1>
+          <form className="content" onSubmit={submit}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
 
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
 
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="UserName"
-          required
-        />
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="UserName"
+              required
+            />
 
-        <button type="submit">Sign Up</button>
-      </form>
+            <button type="submit">Sign Up</button>
+          </form>
 
-      <p>Already have an account?</p>
-      <Link to="/login">Login</Link>
+          <p>
+            Already have an account? &nbsp;
+            <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

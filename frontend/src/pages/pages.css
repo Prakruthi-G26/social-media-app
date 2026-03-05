@@ -1,22 +1,51 @@
-/* Page Background */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #68e3f3, #9333ea);
+.page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  background: linear-gradient(135deg, #0f0f1a, #1c1c2e);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.brand-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 100px;
+  color: white;
+}
+
+.brand-title {
+  font-size: 70px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #8e44ec, #5f9cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tagline {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #b3b3cc;
+}
+
+.login-section {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
+
 
 /* Shared Card Style */
 .login,
 .signup {
-  background: #ffffff;
+  width: 400px;
   padding: 40px;
-  width: 350px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Inner Content */
@@ -36,11 +65,14 @@ body {
 
 /* Input Fields */
 input {
+  width: 100%;
   padding: 12px;
+  margin-top: 15px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  transition: 0.3s ease;
+  border: 1px solid #333;
+  background: #f5f5f7;
+  color: black;
+  outline: none;
 }
 
 input:focus {
@@ -51,18 +83,21 @@ input:focus {
 
 /* Button */
 button {
+  width: 100%;
+  margin-top: 20px;
   padding: 12px;
-  border: none;
   border-radius: 8px;
-  background-color: #4f46e5;
+  border: none;
+  background: linear-gradient(90deg, #8e44ec, #5f9cff);
   color: white;
-  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 button:hover {
-  background-color: #4338ca;
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
 /* Link Section */

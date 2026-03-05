@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PostCard from '../components/PostCard';
-import CreatePost from './CreatePost';
+//import CreatePost from './CreatePost';
 import './feedpage.css'
 
 const Feed = () => {
   const navigate = useNavigate();
 
   const [posts, setPosts] = useState([]);
-  const [newPost, setNewPost] = useState('');
+  //const [newPost, setNewPost] = useState('');
   const [currentUserId, setCurrentUserId] = useState('');
   const token = localStorage.getItem('token');
 
@@ -20,24 +20,25 @@ const Feed = () => {
 
   useEffect(() => {
     if (token) {
-      try{const decoded = JSON.parse(atob(token.split('.')[1]));
-      setCurrentUserId(decoded.id);}
-      catch(err){
-        console.log("invalid token")
+      try {
+        const decoded = JSON.parse(atob(token.split(".")[1]));
+        setCurrentUserId(decoded.id);
+      } catch (err) {
+        console.log("invalid token",err);
       }
       refreshFeed();
     }
   }, [token, refreshFeed]);
 
-  const createPost = async (e) => {
-    e.preventDefault();
-    const res = await axios.post('http://localhost:5000/api/posts', 
-      { content: newPost }, 
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    setPosts(prev => [res.data, ...prev]);
-    setNewPost('');
-  };
+  // const createPost = async (e) => {
+  //   e.preventDefault();
+  //   const res = await axios.post('http://localhost:5000/api/posts', 
+  //     { content: newPost }, 
+  //     { headers: { Authorization: `Bearer ${token}` } }
+  //   );
+  //   setPosts(prev => [res.data, ...prev]);
+  //   setNewPost('');
+  // };
 
   if (!token) return <div>Please log in</div>;
 
@@ -51,7 +52,7 @@ const Feed = () => {
 
       <div className='nav-center'>Feed</div>
       
-      <button onClick={() => navigate("/profile")} className='nav-right'>👤</button>
+      <button onClick={() => navigate("/profile")} className='nav-right'><img src='/frontend/src/assets/account.png'></img></button>
       </div>
 
       <button onClick={() => navigate("/create")} className='create-btn'>+</button>

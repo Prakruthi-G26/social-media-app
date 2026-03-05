@@ -30,7 +30,7 @@ export const signup = async (req, res) => {
         ) {
             return res.status(400).json({
                 status: "passwordconstraints",
-                message: "Password does not meet requirements"
+                message: "Password does not meet requirements\n\n password must be\n 8 characters long\n atleast 1 uppercase\n atleast 1 lowercase, atleast 1 number\n atleast 1 special character"
             });
         }
 
