@@ -1,20 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import PostCard from '../components/PostCard';
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { FaHome, FaUser,  FaPlus} from "react-icons/fa";
+import PostCard from "../components/PostCard";
 //import CreatePost from './CreatePost';
-import './feedpage.css'
+import "./feedpage.css";
 
 const Feed = () => {
   const navigate = useNavigate();
 
   const [posts, setPosts] = useState([]);
   //const [newPost, setNewPost] = useState('');
-  const [currentUserId, setCurrentUserId] = useState('');
-  const token = localStorage.getItem('token');
+  const [currentUserId, setCurrentUserId] = useState("");
+  const token = localStorage.getItem("token");
 
   const refreshFeed = useCallback(async () => {
-    const res = await axios.get('http://localhost:5000/api/posts');
+    const res = await axios.get("http://localhost:5000/api/posts");
     setPosts(res.data);
   }, []);
 
@@ -24,7 +25,7 @@ const Feed = () => {
         const decoded = JSON.parse(atob(token.split(".")[1]));
         setCurrentUserId(decoded.id);
       } catch (err) {
-        console.log("invalid token",err);
+        console.log("invalid token", err);
       }
       refreshFeed();
     }
@@ -32,8 +33,8 @@ const Feed = () => {
 
   // const createPost = async (e) => {
   //   e.preventDefault();
-  //   const res = await axios.post('http://localhost:5000/api/posts', 
-  //     { content: newPost }, 
+  //   const res = await axios.post('http://localhost:5000/api/posts',
+  //     { content: newPost },
   //     { headers: { Authorization: `Bearer ${token}` } }
   //   );
   //   setPosts(prev => [res.data, ...prev]);
@@ -44,20 +45,23 @@ const Feed = () => {
 
   return (
     <div className="home">
+      <div className="navbar">
+        <div className="nav-left" onClick={() => navigate("/feed")}>
+          <FaHome size={22} color="black"/>
+        </div>
 
-      <div className='navbar'>
-      <div className="nav-left" onClick={() => navigate("/feed")}>
-        🏠
+        <div className="nav-center">Feed</div>
+
+        <button onClick={() => navigate("/profile")} className="nav-right">
+          <FaUser size={22} color="black"/>
+        </button>
       </div>
 
-      <div className='nav-center'>Feed</div>
-      
-      <button onClick={() => navigate("/profile")} className='nav-right'><img src='/frontend/src/assets/account.png'></img></button>
-      </div>
-
-      <button onClick={() => navigate("/create")} className='create-btn'>+</button>
+      <button onClick={() => navigate("/create")} className="create-btn">
+        <FaPlus size={22}/>
+      </button>
       <div className="feed">
-        {posts.map(post => (
+        {posts.map((post) => (
           <PostCard
             key={post._id}
             post={post}

@@ -20,7 +20,7 @@
   justify-content: center;
   align-items: center;
 
-  background: rgba(20, 20, 40, 0.85);
+  background: rgba(249, 249, 252, 0.85);
   backdrop-filter: blur(10px);
 
   z-index: 1000;
@@ -43,7 +43,7 @@
 .nav-center {
   font-size: 24px;
   font-weight: bold;
-  color: white;
+  color: rgb(14, 13, 13);
 }
 
 .feed {
@@ -79,6 +79,7 @@
   border: none;
   cursor: pointer;
   font-size: 14px;
+  color: #222;
   transition: 0.3s ease;
 }
 
@@ -116,8 +117,7 @@
 .comment-form button {
   padding: 8px 12px;
   border-radius: 8px;
-  background: #4f46e5;
-  color: white;
+  background: none;
   border: none;
   width: 50px;
   cursor: pointer;
@@ -150,14 +150,14 @@
   border: none;
   cursor: pointer;
   font-size: 14px;
-  color: #555;
+  color: black;
   transition: all 0.3s ease;
 }
 
 /* Hover Effect */
 .post-actions button:hover {
   transform: scale(1.1);
-  color: #4f46e5;
+  color: black;
 }
 
 .create-btn {

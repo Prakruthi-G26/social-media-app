@@ -51,6 +51,7 @@ function CreatePost() {
         />
 
         <button type="submit">Create</button>
+        <button >cancel</button>
       </form>
     </div></div>
   );

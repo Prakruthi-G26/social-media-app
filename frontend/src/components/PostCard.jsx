@@ -1,48 +1,58 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
+import { HiCheck, HiX, HiPaperAirplane } from "react-icons/hi";
+import { FaEdit, FaPaperPlane } from "react-icons/fa";
+import { FaTrash, FaComment, FaHeart } from "react-icons/fa";
+import { FiHeart } from "react-icons/fi";
 
 const PostCard = ({ post, token, currentUserId, refreshFeed }) => {
   const [showComments, setShowComments] = useState(false);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(post.text);
 
   const handleLike = async () => {
-    await axios.put(`http://localhost:5000/api/posts/${post._id}/like`, {}, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+    await axios.put(
+      `http://localhost:5000/api/posts/${post._id}/like`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     refreshFeed();
   };
 
   const handleComment = async (e) => {
     e.preventDefault();
-    await axios.post(`http://localhost:5000/api/posts/${post._id}/comment`, 
-      { text: newComment }, 
-      { headers: { Authorization: `Bearer ${token}` } }
+    await axios.post(
+      `http://localhost:5000/api/posts/${post._id}/comment`,
+      { text: newComment },
+      { headers: { Authorization: `Bearer ${token}` } },
     );
-    setNewComment('');
+    setNewComment("");
     refreshFeed();
   };
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/api/posts/${post._id}`,
-        {text: editedText},
-        {headers: { Authorization: `Bearer ${token}`}}
+    await axios.put(
+      `http://localhost:5000/api/posts/${post._id}`,
+      { text: editedText },
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     setIsEditing(false);
     refreshFeed();
-  }
+  };
   const handleDelete = async () => {
-    if (window.confirm('Delete this post?')) {
+    if (window.confirm("Delete this post?")) {
       await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       refreshFeed();
     }
   };
 
-  const isLiked = post.likes.some(like => like._id === currentUserId);
+  const isLiked = post.likes.some((like) => like._id === currentUserId);
   const isAuthor = post.author._id === currentUserId;
 
   return (
@@ -51,30 +61,33 @@ const PostCard = ({ post, token, currentUserId, refreshFeed }) => {
         <strong>{post.author.name}</strong>
         <small>{new Date(post.createdAt).toLocaleString()}</small>
       </div>
-      
-      {isEditing ? (
-  <form onSubmit={handleEdit}>
-    <textarea
-      value={editedText}
-      onChange={(e) => setEditedText(e.target.value)}
-    />
-    <button type="submit">Save</button>
-    <button type="button" onClick={() => setIsEditing(false)}>
-      Cancel
-    </button>
-  </form>
-) : (
-  <p>{post.text}</p>
-)}
 
-      
+      {isEditing ? (
+        <form onSubmit={handleEdit}>
+          <textarea
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+          />
+          <div className="edit-buttons">
+            <button type="submit">
+              <HiCheck size={20} color="black" />
+            </button>
+            <button type="button" onClick={() => setIsEditing(false)}>
+              <HiX size={20} color="black" />
+            </button>
+          </div>
+        </form>
+      ) : (
+        <p>{post.text}</p>
+      )}
+
       <div className="post-actions">
-        <button onClick={handleLike} className={isLiked ? 'liked' : ''}>
-          {isLiked ? '❤️' : '🤍'} {post.likes.length}
+        <button onClick={handleLike} className={isLiked ? "liked" : ""}>
+          {isLiked ? <FaHeart size={22} color="red" /> : <FiHeart/>} {post.likes.length}
         </button>
-        
+
         <button onClick={() => setShowComments(!showComments)}>
-          💬 {post.comments.length}
+          <FaComment size={20} color="black" /> {post.comments.length}
         </button>
       </div>
 
@@ -86,12 +99,15 @@ const PostCard = ({ post, token, currentUserId, refreshFeed }) => {
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Write a comment..."
             />
-            <button type="submit">Post</button>
+            <button type="submit">
+              <FaPaperPlane size={20} color="black" />
+            </button>
           </form>
-          
+
           <div className="comments">
             {post.comments.map((comment, idx) => (
               <div key={comment._id} className="comment">
+                <p>Comments on this post</p>
                 <strong>{comment.author.name}:</strong> {comment.text}
               </div>
             ))}
@@ -101,8 +117,14 @@ const PostCard = ({ post, token, currentUserId, refreshFeed }) => {
 
       {isAuthor && (
         <div className="author-actions">
-          <button onClick={() => setIsEditing(true)}>✏️ Edit</button>
-          <button onClick={handleDelete} style={{ color: 'red' }}>🗑️ Delete</button>
+          <button onClick={() => setIsEditing(true)}>
+            <FaEdit size={22} color="black" />
+            &nbsp; &nbsp;Edit
+          </button>
+          <button onClick={handleDelete} style={{ color: "red" }}>
+            <FaTrash size={22} color="black" />
+            &nbsp; &nbsp; Delete
+          </button>
         </div>
       )}
     </div>
