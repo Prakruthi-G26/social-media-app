@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { HiCheck, HiX, HiPaperAirplane } from "react-icons/hi";
+import { timeAgo } from "./timeAgo"
+import { HiCheck, HiX} from "react-icons/hi";
 import { FaEdit, FaPaperPlane } from "react-icons/fa";
 import { FaTrash, FaComment, FaHeart } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
@@ -59,7 +60,7 @@ const PostCard = ({ post, token, currentUserId, refreshFeed }) => {
     <div className="post-card">
       <div className="post-header">
         <strong>{post.author.name}</strong>
-        <small>{new Date(post.createdAt).toLocaleString()}</small>
+        <small>{timeAgo(post.createdAt)}</small>
       </div>
 
       {isEditing ? (
@@ -105,9 +106,10 @@ const PostCard = ({ post, token, currentUserId, refreshFeed }) => {
           </form>
 
           <div className="comments">
+            <p>Comments on this post</p>
             {post.comments.map((comment, idx) => (
               <div key={comment._id} className="comment">
-                <p>Comments on this post</p>
+                
                 <strong>{comment.author.name}:</strong> {comment.text}
               </div>
             ))}
