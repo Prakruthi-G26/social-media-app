@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './createpost.css'
+import { FiX } from "react-icons/fi";
+import "./createpost.css";
 
 function CreatePost() {
   const navigate = useNavigate();
@@ -21,11 +22,10 @@ function CreatePost() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       navigate("/feed");
-
     } catch (error) {
       if (error.response?.data?.message) {
         alert(error.response.data.message);
@@ -38,22 +38,24 @@ function CreatePost() {
 
   return (
     <div className="create-page">
-      <div className="create-card">
-      <h1>Create Post</h1>
+      <div className="create-post-header">
+        <FiX className="cancel-icon" onClick={() => navigate("/feed")} />
 
-      <form onSubmit={handleCreate}>
+        <h3>New Post</h3>
 
+        <button className="share-btn" onClick={handleCreate} disabled={!text.trim()}>
+          Share
+        </button>
+      </div>
+
+      <div className="create-post-body">
         <textarea
+          placeholder="What's on your mind?"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Content"
-          required
         />
-
-        <button type="submit">Create</button>
-        <button >cancel</button>
-      </form>
-    </div></div>
+      </div>
+    </div>
   );
 }
 

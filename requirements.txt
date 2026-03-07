@@ -1,0 +1,5 @@
+multer // for image uplaod
+date-fns // times ago update
+react-icons // icons
+react-router-dom
+axios
