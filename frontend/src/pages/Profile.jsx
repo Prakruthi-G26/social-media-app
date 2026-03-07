@@ -58,7 +58,7 @@ const Profile = () => {
       </div>
 
       {/* User Posts */}
-      <div className="profile-posts">
+      <div className="profile-posts fade-in">
         <div className="profile-grid">
           {posts.map((post) => (
             <PostCard
